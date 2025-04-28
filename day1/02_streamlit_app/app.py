@@ -65,7 +65,7 @@ page = st.sidebar.radio(
 )
 
 
-# --- メインコンテンツ ---
+# --- メインコンテンツ ----
 if st.session_state.page == "チャット":
     if pipe:
         ui.display_chat_page(pipe)
