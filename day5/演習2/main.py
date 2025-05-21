@@ -206,6 +206,19 @@ class ModelTester:
         """ベースラインと比較する"""
         return current_metrics["accuracy"] >= baseline_threshold
 
+    @staticmethod
+    def test_inference_speed_and_accuracy(self, model, X_test, y_test):
+        """推論速度と精度をテストする"""
+        start_time = time.time()
+        y_pred = model.predict(X_test)
+        inference_time = time.time() - start_time
+
+        accuracy = accuracy_score(y_test, y_pred)
+        assert accuracy >= 0.75, f"Accuracy is below the threshold: {accuracy}"
+        assert (
+            inference_time < 1.0
+        ), f"Inference time is too long: {inference_time} seconds"
+
 
 # テスト関数（pytestで実行可能）
 def test_data_validation():
